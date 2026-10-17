@@ -1,0 +1,37 @@
+ZmartZnap snapshot file index
+Files included: 32
+
+.github/workflows/ci.yml
+CHANGELOG.md
+config/alfresco-adapter.README.md
+config/powershell-example.ps1
+docs/ALIGNMENT_V10.md
+docs/C5_KOMPILER_08.md
+docs/INVENTAIRE.md
+docs/PLAN_EXECUTION.md
+docs/QUALIFICATION.md
+docs/RELEASE_VERIFICATION.md
+docs/SECURITE.md
+examples/demo-backend.json
+examples/kompiler-v7-projection-demo.json
+examples/kristall-surface.query.json
+examples/zoology-github-collection.query.json
+GitSink.bat
+MANIFEST.sha256.json
+overlay/server/integrations/kompiler-bridge.mjs
+overlay/src/components/KompilerPanel.svelte
+README.md
+tests/bridge.test.mjs
+tests/check_schemas.py
+tests/live_c5_zoology.py
+tests/overlay.test.mjs
+tests/test_c3_readiness.py
+tests/test_installer.py
+tools/check_c3_readiness.py
+tools/install.py
+tools/kristal-bridge.mjs
+tools/verify_manifest.py
+VERSION
+ZmartZnap.pyw
+
+Index file: SNAPSHOT_INDEX.txt

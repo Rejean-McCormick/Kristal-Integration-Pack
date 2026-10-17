@@ -1,150 +1,234 @@
-# Kristal Integration Pack — Konstellation × Kompiler × Local Kit
+# Kristal Integration Pack
 
-**Version de base : 0.1.0-alpha.1 — 8 octobre 2026**
+**Version:** `0.3.0-alpha.1`  
+**Status:** Integration candidate — tested locally, not production-qualified  
+**Framework target:** `11.0.0-draft.4`
 
-**Mise à jour C5 (non publiée) :** le CLI accepte et vérifie les protocoles Kompiler 1.0/1.1 ; essais dédiés sur Kompiler `0.8.0-alpha.1` et Framework `10.0.0-draft.3.1`. L’overlay historique concerne **Konstellation**, pas Konstellation Light. Voir `docs/C5_KOMPILER_08.md`.
+The **Kristal Integration Pack** connects the Kristal ecosystem without merging its tools or changing their responsibilities. It provides a read-only Framework v11 reader, a guarded handoff from diK to the Kristal Authoring Kit, and a separate compatibility bridge for historical Kompiler/Konstellation workflows.
 
-Pack d'intégration **non monolithique**, construit à partir des archives fournies :
-Konstellation `1.0.0-rc.2`, Kompiler `0.7.0-alpha.3`, Kristal Framework
-`10.0.0-draft.3`, Local Kit `3.2.4`, et prototype SemantiK français v3.
+It is **not** a semantic authority, a dictionary approval service, a publisher, or a replacement for Framework validation.
 
-## Ce que ce pack fait vraiment
+## Compatibility at a glance
 
-- Un **panneau Kompiler** s'ajoute à l'interface Konstellation existante.
-- Le serveur Konstellation expose quatre routes de pont :
-  `GET /api/kompiler/capabilities`, `POST /api/kompiler/validate`,
-  `POST /api/kompiler/run`, `POST /api/kompiler/projection`.
-- La passerelle REST est restreinte à l'API Kompiler locale, avec contrôle de scope `read` + `kompiler`, validation d'origine héritée de Konstellation, taille/temps limités.
-- Le CLI exécute une requête **Kompiler** puis demande une projection v6 lorsque le Context Pack contient une Surface v7 appropriée. Il génère une **configuration Konstellation épinglée par SHA-256** et un reçu de provenance dans un dossier neuf.
-- Le CLI peut appeler les fonctions **réelles** de Local Kit pour inspecter/valider; `build-v9` et `publish-v9` sont bloquées sans double opt-in explicite.
-- L'installateur conserve les originaux et permet une restauration.
+| Component | Supported or documented baseline | Integration scope |
+| --- | --- | --- |
+| Kristal Framework | **11.0.0-draft.4** | Exact checkout required; 13 contract/tool files pinned by SHA-256 |
+| Kristal Authoring Kit | **4.0.0-draft.3** | Separate, explicitly approved catalog import and selection |
+| diK | **1.0.0-alpha.7** | Read-only validation of incoming catalogs and optional import receipts |
+| Arketype | **1.6.0** | Ecosystem compatibility reference; no runtime integration claimed |
+| Kompiler | Historical **0.8.0-alpha.1** compatibility profile | Context Pack and eligible v7 Surface → v6 projection |
+| Konstellation | Historical **1.0.0-rc.2** overlay target | Opt-in legacy installation only on a verified, unmodified checkout |
 
-### Limitations cruciales
+The Authoring Kit draft.3 still has its own Framework draft.3 pin. The Pack does not silently change that pin. Framework v11 schemas consumed here remain byte-compatible between draft.3 and draft.4; the additional interop preflight is pinned to draft.4.
 
-- `POST /v1/projections/v6` de Kompiler matérialise une **Surface v7**. Il **ne convertit pas tout état Kristal v9/v10 en document v6**. Kompiler peut lire certains états/pubs v9/v10 via ses adaptateurs, mais un lecteur/projeteur général Konstellation v9/v10 reste à qualifier.
-- Les Context Packs sont des **lectures dérivées**, et une projection v6 n'est pas une preuve de vérité ou une republication de l'état engagé. Toute perte de couverture doit être consultée dans le Context Pack original.
-- L'intégration n'ajoute **aucun** nouveau droit d'accès ; ne pas donner à Kompiler accès à un corpus plus large que le lecteur autorisé. En mode local, elle doit être activée explicitement ; en réseau, fournir des comptes et scopes dédiés.
-- Alfresco n'est **pas** branché ; SemantiK et l'intégration Manager/Bootstrap complète ne sont **pas** inclus. Konstellation a déjà des points d'intégration SemantiK, mais le profil français candidat n'est pas un runtime de production qualifié.
-- Installation UI testée par patch et syntaxe, **pas** qualifiée par un build Astro/Svelte complet (Node v24.15+ et dépendances absents de cet environnement).
+## What the Pack provides
 
-## Structure du pack
+- **Framework v11 validation:** `check` validates canonical graph identifiers, identity registry, approved Wikidata crosswalks, catalog metadata, and lexical layers through the pinned Framework tools.
+- **Language coverage:** `coverage` keeps *direct*, *fallback*, and *missing* terms distinct.
+- **Derived reading views:** `view` creates a non-canonical presentation for a selected locale, preserving KQ/KP identity references and source assertions.
+- **diK → Authoring Kit preflight:** `v11-handoff` checks an incoming catalog and, optionally, a diK alpha.7 `dik-job.json` receipt; it does **not** register, select, activate, or publish anything.
+- **Historical Kompiler bridge:** guarded Context Pack creation and v6 projection when an appropriate v7 Surface exists.
+- **Legacy Konstellation overlay:** inspect, preview, and conditionally install or roll back an integration on an eligible historical checkout. **Never force-reinstall over an already integrated Konstellation.**
+
+## Requirements
+
+- **Python 3.11+**, with `jsonschema` available for the Framework v11 tools.
+- An **exact Kristal Framework 11.0.0-draft.4 checkout** for v11 commands. The Pack checks its `VERSION` and the digests in [`contracts/v11-framework-pin.json`](contracts/v11-framework-pin.json).
+- **Node.js 22+** for the standalone Node bridge. The historical Konstellation release environment requires **Node.js 24.15+**.
+- The Authoring Kit checkout only when an operator actually performs an approved catalog import or selection; the Pack does not distribute it.
+- An explicitly authorized **local Kompiler service** only for historical `doctor`, `run`, and `project` commands. No network access is needed for the v11 reader or preflight.
+
+## Quick start: validate a Framework v11 project
+
+Run these commands from the **Integration Pack repository root**. Replace `FW` with the absolute path to the exact Framework checkout.
+
+```bash
+FW=/absolute/path/to/Kristal-Framework-v11.0.0-draft.4
+S="$FW/examples/v11"
+
+python tools/v11_integration.py check \
+  --framework "$FW" \
+  --registry "$S/identity-registry.example.json" \
+  --graph "$S/semantic-graph.example.json" \
+  --crosswalk "$S/external-crosswalk.example.json" \
+  --catalog "$S/dictionaries/catalog.json"
+```
+
+The command reads and validates the inputs; it never edits the original canonical graph or dictionary layers. The Framework checkout must match the reviewed SHA-256 pin or the command refuses to proceed.
+
+### Check language coverage
+
+```bash
+python tools/v11_integration.py coverage \
+  --framework "$FW" \
+  --registry "$S/identity-registry.example.json" \
+  --graph "$S/semantic-graph.example.json" \
+  --crosswalk "$S/external-crosswalk.example.json" \
+  --catalog "$S/dictionaries/catalog.json" \
+  --locales fr-CA,en --out ./coverage-fr-CA-en.json
+```
+
+### Build a derived reading view
+
+```bash
+python tools/v11_integration.py view \
+  --framework "$FW" \
+  --registry "$S/identity-registry.example.json" \
+  --graph "$S/semantic-graph.example.json" \
+  --crosswalk "$S/external-crosswalk.example.json" \
+  --catalog "$S/dictionaries/catalog.json" \
+  --locale fr-CA --out ./view-fr-CA.json
+```
+
+For these commands, `--out` creates a **new file only**: an existing destination will not be overwritten. The resulting `read-view/v11.0-draft.1` is a **derived display artifact**, not a new semantic graph, identity assignment, or publication record.
+
+## diK alpha.7 → Authoring Kit draft.3: guarded handoff
+
+Use the Pack to perform an independent, read-only preflight before an approved catalog is considered for import into the Authoring Kit.
+
+### Preflight an existing Framework example catalog
+
+```bash
+python tools/v11_handoff.py \
+  --framework "$FW" \
+  --catalog "$S/dictionaries/catalog.json" \
+  --registry "$S/identity-registry.example.json" \
+  --crosswalk "$S/external-crosswalk.example.json" \
+  --graph "$S/semantic-graph.example.json" \
+  --locales fr-CA,en
+```
+
+### Preflight a real diK alpha.7 import candidate
+
+Replace the paths with the **matching outputs of one reviewed import job**. The `--kit-import-candidate` mode accepts only incoming Wikidata layers, not mixed-in curated layers.
+
+```bash
+python tools/v11_handoff.py \
+  --framework "$FW" \
+  --catalog /path/to/dik-import/catalog.json \
+  --registry /path/to/project/identity-registry.json \
+  --crosswalk /path/to/project/external-crosswalk.json \
+  --kit-import-candidate \
+  --dik-job /path/to/dik-import/dik-job.json \
+  --out ./dik-kit-preflight.json
+```
+
+The optional diK receipt is checked against the catalog, source pins, registry, crosswalk, transformation profile, and idempotency key. A digest match protects consistency; **it does not prove the origin of Wikidata data, semantic equivalence, or human approval**.
+
+Node users can call the same guarded workflow with `node tools/kristal-bridge.mjs v11-handoff ...`; see [`docs/DIK_KIT_HANDOFF_V11.md`](docs/DIK_KIT_HANDOFF_V11.md) for the exact allowlisted arguments.
+
+**Approval and adoption are separate actions performed by the Authoring Kit**, using `import-dik-catalog`, `select-v11-catalog`, and, if needed, `recover-v11`. The Integration Pack never runs those commands automatically and never renumbers or merges KQ/KP identities.
+
+## Historical Kompiler and Konstellation workflows
+
+These commands are **separate from Framework v11**. A Kompiler Context Pack or v6 projection must not be mistaken for a canonical v11 semantic graph.
+
+### Local Kompiler CLI
+
+Start an authorized Kompiler instance on loopback, then use:
+
+```bash
+export KOMPILER_URL=http://127.0.0.1:7788
+node tools/kristal-bridge.mjs doctor
+node tools/kristal-bridge.mjs run \
+  --query examples/kristall-surface.query.json \
+  --out ./results/context-pack.json
+node tools/kristal-bridge.mjs project \
+  --pack ./results/context-pack.json \
+  --out ./results/projection
+```
+
+Inspect the capabilities returned by `doctor`: the example does **not** guarantee that a suitable v7 Surface is available. Projection fails rather than fabricating missing assertions. The bridge restricts the local service URL and supported CLI options.
+
+### Inspect an old Konstellation overlay before installing
+
+The integration overlay was designed for a verified, **unmodified historical** Konstellation checkout. The supplied already-integrated Konstellation snapshot must **not** be overlaid again.
+
+```bash
+python tools/install.py /path/to/Konstellation --status
+python tools/install.py /path/to/Konstellation
+```
+
+Only if the owner verifies the checkout is eligible, an explicit installation can be considered:
+
+```bash
+python tools/install.py /path/to/Konstellation --apply
+```
+
+Rollback is a separate, deliberate action:
+
+```bash
+python tools/install.py /path/to/Konstellation --rollback
+```
+
+Treat `DO_NOT_REINSTALL_EXISTING_INTEGRATION` as a **stop condition**, not permission to override safety checks. No overlay deployment, production Astro/Svelte build, or browser-level Konstellation qualification is claimed for this release. Multiuser access remains blocked until the host binds its reader authorization policies to the upstream requests.
+
+### Local Kit write safeguards
+
+Historical `build-v9` and `publish-v9` operations require **both** `KRISTAL_ALLOW_WRITE=1` and the action's explicit matching confirmation. Back up the target workspace first. Neither the v11 reader nor the handoff grants write permission or bypasses the Kit's governance.
+
+## Repository layout
 
 ```text
-overlay/server/integrations/kompiler-bridge.mjs  API locale
-  overlay/src/components/KompilerPanel.svelte    panneau dans Konstellation
-  tools/install.py                               pose et restauration du patch
-  tools/kristal-bridge.mjs                       CLI de passage entre outils
-  examples/kristall-surface.query.json           requête de référence
-  examples/kompiler-v7-projection-demo.json      véritable projection obtenue du runtime
-  examples/demo-backend.json                     backend Konstellation de démonstration
-  tests/                                        tests API/CLI/patch/schema
-  docs/                                         qualification, sécurité, feuille de route
+contracts/v11-framework-pin.json                 Reviewed Framework v11 version and SHA-256 pins
+tools/v11_integration.py                          Read-only check, coverage, and derived views
+tools/v11_handoff.py                              diK-to-Authoring-Kit preflight
+tools/kristal-bridge.mjs                          Node CLI: legacy bridge and v11 entry points
+tools/install.py                                 Guarded historical overlay installer and rollback
+tools/check_c3_readiness.py                      Delegated local collection readiness check
+overlay/server/integrations/kompiler-bridge.mjs   Historical Konstellation API integration
+overlay/server/integrations/kristal-v11-read-view.mjs  Defensive derived-view format guard
+overlay/src/components/KompilerPanel.svelte      Historical Konstellation UI panel
+examples/                                        Sample queries and JSON output formats
+tests/                                           Python and Node regression tests
+docs/                                            Security, alignment, handoff, and qualification evidence
+MANIFEST.sha256.json                              Source-file integrity manifest
 ```
 
-## 1. Pré-requis
+## Verification and tests
 
-- Un checkout **Konstellation `1.0.0-rc.2`** extrait de `SmartSnap(20261008-190258).zip`.
-- Kompiler `0.7.0-alpha.3` installé avec l'option API (`python -m pip install -e '.[api]'` depuis son dépôt).
-- Node.js **>=24.15** pour exécuter Konstellation. Le CLI est testable avec Node 22+.
-- Framework v10 draft.3 (pour Kompiler) et Local Kit 3.2.4 si authoring voulu.
+Run the local regression suites from the repository root:
 
-Sur le Framework exact fourni, le SHA-256 de `contracts/contract-set.json` est :
-
-```text
-1e516dd026bce754fd4f22b874ba2d603f64954831a1b5c754ecbb475d29020f
+```bash
+python -m unittest discover -s tests -p 'test_*.py' -v
+node --test tests/*.test.mjs
+python tools/verify_manifest.py
+python tools/release_package.py verify
 ```
 
-**Recalculer le hash sur ta copie** avant utilisation. Par exemple :
+For the pinned v11 tests, provide the exact local Framework checkout:
 
-```powershell
-(Get-FileHash 'C:\mycode\Kristal\Kristal-Framework\contracts\contract-set.json' -Algorithm SHA256).Hash.ToLower()
+```bash
+export KRISTAL_FRAMEWORK_ROOT=/absolute/path/to/Kristal-Framework-v11.0.0-draft.4
+python -m unittest discover -s tests -p 'test_v11*.py' -v
+node --test tests/v11.test.mjs
 ```
 
-Configurer Kompiler (PowerShell) :
+The **0.3.0-alpha.1 local qualification** recorded **29 passing Python tests and 15 passing Node tests**, including a temporary Authoring Kit draft.3 example-workspace handoff. This does **not** establish a production release. The diK alpha.7 receipt tests used a synthetic receipt structure; the exact binary output of a real diK import was not independently qualified here.
 
-```powershell
-$env:KOMPILER_KRISTAL_STANDARD_ROOT = 'C:\mycode\Kristal\Kristal-Framework'
-$env:KOMPILER_KRISTAL_CONTRACT_SET_SHA256 = '1e516dd026bce754fd4f22b874ba2d603f64954831a1b5c754ecbb475d29020f'
-# dans le checkout Kompiler
-python -m kompiler serve --host 127.0.0.1 --port 7788
-```
+See [`docs/QUALIFICATION_030_ALPHA1.md`](docs/QUALIFICATION_030_ALPHA1.md), [`docs/QUALIFICATION_V11.md`](docs/QUALIFICATION_V11.md), and [`docs/RELEASE_VERIFICATION.md`](docs/RELEASE_VERIFICATION.md) for executed evidence and remaining gaps.
 
-Dans un autre terminal :
+## Security and ownership rules
 
-```powershell
-# Aperçu sans modification
-python .\tools\install.py 'C:\mycode\Konstellation'
-# Appliquer le pont
-python .\tools\install.py 'C:\mycode\Konstellation' --apply
+1. **Canonical identity is immutable to this Pack.** Kristal Framework defines the contract; KQ/KP/KA/KS references cannot be replaced by words or raw Wikidata Q/P identifiers.
+2. **Wikidata is external evidence.** Only reviewed `accepted + exactMatch` correspondences may be used as exact identity references. `candidate`, `closeMatch`, label similarity, redirects, and missing pages do not confer equivalence.
+3. **diK produces lexical snapshots and review proposals**, not automatic semantic revisions.
+4. **The Authoring Kit owns authoring and explicit catalog adoption**; the Pack's preflight does not register or activate artifacts.
+5. **Konstellation and Kompiler remain independent.** Konstellation is a navigator, Kompiler produces derived Context Packs/projections, and neither is made a new publishing authority by this bridge.
+6. **No implicit host installation or publication.** Keep integrations local and scope-bound; do not enable shared HTTP access without the host's explicit reader policies.
 
-$env:KONSTELLATION_KOMPILER_URL = 'http://127.0.0.1:7788'
-$env:KONSTELLATION_ENABLE_KOMPILER_LOCAL = 'true'
-# pour Kompiler avec jeton, le passer par variable d'environnement seulement
-# $env:KONSTELLATION_KOMPILER_TOKEN = 'secret local'
+## Documentation
 
-cd 'C:\mycode\Konstellation'
-npm install
-npm run build
-npm start
-```
+- [Framework v11 read-only alignment](docs/ALIGNMENT_V11.md)
+- [diK → Authoring Kit handoff](docs/DIK_KIT_HANDOFF_V11.md)
+- [Framework/Kit qualification](docs/QUALIFICATION_030_ALPHA1.md)
+- [Legacy Kompiler compatibility](docs/C5_KOMPILER_08.md)
+- [Security boundaries](docs/SECURITE.md)
+- [Execution plan](docs/PLAN_EXECUTION.md)
+- [Release verification](docs/RELEASE_VERIFICATION.md)
 
-Pour retirer le pont :
+## Current limitations
 
-```powershell
-python .\tools\install.py 'C:\mycode\Konstellation' --rollback
-```
+This alpha release has **not** been validated on a complete production Konstellation deployment, through Astro/Svelte browser flows, under live multiuser Reader Policies, or against a real large-scale Wikidata import from the diK executable. Full end-to-end restore/recovery, signatures and approvals, C1/C2 host authorization, and final cross-repository conformance remain open.
 
-**Attention :** les chemins sont illustratifs ; adapte-les au répertoire réel des sources.
-
-## 2. Essai CLI — parcourir un Kristal jusqu'à Konstellation
-
-`doctor` interroge les capacités réellement offertes, notamment les identifiants de cibles.
-La requête d'exemple est illustrative : adapter son `target` et ses paramètres à la cible annoncée.
-
-```powershell
-$env:KOMPILER_URL = 'http://127.0.0.1:7788'
-node .\tools\kristal-bridge.mjs doctor
-node .\tools\kristal-bridge.mjs run --query .\examples\kristall-surface.query.json --out .\resultats\context-pack.json
-node .\tools\kristal-bridge.mjs project --pack .\resultats\context-pack.json --out .\resultats\projection
-
-$env:KONSTELLATION_BACKEND_CONFIG = 'C:\...\Kristal-Integration-Pack\resultats\projection\konstellation-backend.json'
-# redémarrer Konstellation : la sélection du backend est chargée au démarrage
-```
-
-La projection échoue normalement si le pack ne contient pas la Surface requise. Le CLI **n'invente jamais** des assertions manquantes.
-
-### Démonstration sans requête Kompiler
-
-Le fichier `examples/kompiler-v7-projection-demo.json` a été construit par le **vrai Kompiler** avec son fixture officiel v7. Il valide les schémas v6 Konstellation et Framework.
-
-```powershell
-$env:KONSTELLATION_BACKEND_CONFIG = 'C:\...\Kristal-Integration-Pack\examples\demo-backend.json'
-# lancer Konstellation
-```
-
-Son contenu est **illustratif**, pas un corpus métier. L'absence de node_modules de Konstellation a empêché une vérification de rendu navigateur dans notre environnement.
-
-## 3. Pilotage prudent du Local Kit
-
-```powershell
-node .\tools\kristal-bridge.mjs author --tool 'C:\mycode\Kristal\Kristal-Authoring-Kit\tools\kristal.py' --workspace 'C:\mycode\Kristal\Mon-Kristal' --action inspect
-node .\tools\kristal-bridge.mjs author --tool 'C:\mycode\Kristal\Kristal-Authoring-Kit\tools\kristal.py' --workspace 'C:\mycode\Kristal\Mon-Kristal' --action check
-```
-
-Les opérations `build-v9` et `publish-v9` exigent **simultanément** `KRISTAL_ALLOW_WRITE=1` et `--confirm build-v9` ou `--confirm publish-v9`. Elles agissent sur ton vrai workspace, sont **désactivées par défaut** et doivent être précédées d'une sauvegarde. Le CLI appelle le Local Kit sans `shell` et n'introduit pas de nouvelle mécanique de publication.
-
-## 4. Tester
-
-```powershell
-node --test .\tests\bridge.test.mjs
-python -m unittest discover -s tests -p 'test_installer.py' -v
-python .\tests\check_schemas.py --konstellation 'C:\mycode\Konstellation' --framework 'C:\mycode\Kristal\Kristal-Framework'
-```
-
-Le test d'installateur est exécuté pleinement quand la sauvegarde de checkout utilisée pour sa qualification est présente ; sinon il est marqué *skip*.
-
-## 5. Suite logique
-
-Lire `docs/PLAN_EXECUTION.md` et `docs/QUALIFICATION.md` pour distinguer les opérations terminées, partielles et non exécutées. Maintenir les dépôts séparés ; le pack contient des ajouts et des adaptateurs ciblés, pas une copie de tous les projets ni d'Alfresco.
-#   K r i s t a l - I n t e g r a t i o n - P a c k  
- 
+**Release principle:** validate and explain interoperability; never silently merge identities, overwrite canonical data, install an existing overlay, or imply approval from a successful preflight.

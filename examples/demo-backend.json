@@ -1,0 +1,7 @@
+{
+  "adapter": "kristal-state-v6",
+  "directory": ".",
+  "state": "kompiler-v7-projection-demo.json",
+  "stateSha256": "00786c09693538b53306eb149b08d86a2a0c98f900ed5c69797a8fe534fb94a6",
+  "compatibilityMode": "strict"
+}

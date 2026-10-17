@@ -1,0 +1,12 @@
+{
+  "protocol": "kompiler.query",
+  "version": "1.1",
+  "request_id": "c5-zoology-verified-entrypoint",
+  "topic": "zoology",
+  "operations": [{
+    "id": "read-zoology",
+    "target": "GitHubCollection:kristal-public",
+    "operation": "entrypoint",
+    "params": {"slug": "zoology"}
+  }]
+}

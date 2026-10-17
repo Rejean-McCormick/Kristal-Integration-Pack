@@ -1,0 +1,31 @@
+{
+  "schema_version": "6.0",
+  "artifact_type": "kristal_state",
+  "artifact_status": "working",
+  "created_at": "2026-10-08T21:01:41.966909Z",
+  "assertions": [],
+  "provenance": [],
+  "extensions": {
+    "kristal_v7": {
+      "role": "projection",
+      "kristall_id": "urn:kristall:main",
+      "projection_id": "projection:sha256:b5afb61eedc6e5f465f4d031d969d4559cdd47c86819ec8a5da7b162830763b0",
+      "subject": {
+        "subject_id": "subject:power"
+      },
+      "orientation": {
+        "primary_axis": "KQ2001"
+      },
+      "generated_from": {
+        "manifest_id": "urn:kristall:main",
+        "recipe_id": "recipe:kompiler-adhoc",
+        "source_state_refs": [
+          "sha256:source-formal",
+          "sha256:source-informal"
+        ],
+        "build_id": "artifact:sha256:5c165f93c2d3971250bb307a408f6f17c1dc9a8275a61e90dbc840828d2b4ca0"
+      },
+      "generated_at": "2026-10-08T21:01:41.960737Z"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "protocol": "kompiler.query",
+  "version": "1.1",
+  "request_id": "example-kristall-surface",
+  "intent": "compile_surface",
+  "topic": "power",
+  "operations": [
+    {
+      "id": "legal-power-surface",
+      "target": "Kristall:kristall-main",
+      "operation": "surface",
+      "surface": {
+        "subject": {
+          "subject_id": "subject:power-canada-quebec"
+        },
+        "orientation": {
+          "primary_axis": "KQ2001"
+        },
+        "source_policy": {
+          "include_status": ["active"]
+        },
+        "conflict_policy": "preserve_disagreement"
+      },
+      "params": {
+        "resonance_min": 0.5
+      }
+    }
+  ]
+}

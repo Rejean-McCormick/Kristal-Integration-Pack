@@ -1,0 +1,64 @@
+{
+  "assertions": [
+    {
+      "id": "KA3001",
+      "object": {
+        "id": "KQ1002",
+        "kind": "entity"
+      },
+      "predicate": "KP2001",
+      "sources": [
+        "KS4001"
+      ],
+      "subject": "KQ1001"
+    }
+  ],
+  "coverage_counts": {
+    "direct": 0,
+    "fallback": 1,
+    "missing": 2
+  },
+  "derived_only": true,
+  "limits": "Non-canonical derived read view, not proof of complete translation, identity authority, semantic migration or publication.",
+  "presentation": [
+    {
+      "kind": "property",
+      "lexical": {
+        "status": "missing"
+      },
+      "semantic_id": "KP2001"
+    },
+    {
+      "accepted_external_exact": {
+        "id": "Q8018",
+        "system": "wikidata"
+      },
+      "kind": "entity",
+      "lexical": {
+        "effective_locale": "fr",
+        "layer_id": "reviewed-fr-demo",
+        "status": "fallback",
+        "term": "Saint Augustin"
+      },
+      "semantic_id": "KQ1001"
+    },
+    {
+      "kind": "entity",
+      "lexical": {
+        "status": "missing"
+      },
+      "semantic_id": "KQ1002"
+    }
+  ],
+  "profile": "kristal.integration.read-view/v11.0-draft.1",
+  "requested_locale": "fr-CA",
+  "source": {
+    "catalog_sha256": "63662038addf7ca5e2e24729a024ea3b3b51ebb83533f9d1d2c263bf0487deb1",
+    "crosswalk_sha256": "3bcf0ab6a2dc6fdae4def9c3db4d5530f177ab53e18dc2ff1b859278ec4dc8e2",
+    "framework_version": "11.0.0-draft.4",
+    "graph_id": "demo-graph",
+    "graph_sha256": "50caca8e1af9af62d5af7f757c87b05d2302e00ab18010ea2bc6606f0a7fec27",
+    "namespace_id": "example.org/kristal-demo",
+    "registry_sha256": "95f671769ef44336eaa4790837d1fd24b4f28153d42c45680d9a9ebad9347410"
+  }
+}

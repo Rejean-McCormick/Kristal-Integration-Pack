@@ -1,0 +1,19 @@
+{
+  "files": {
+    "VERSION": "29dd7fcfe48675b24cfdf5cc8100d55efe725c376f1b04298cc7a8b196faceb1",
+    "schemas/v11/kristal-curated-dictionary.schema.json": "783b668fcd0399c4ebeaa2507bcf8761493d41b768c16a0064759a8ba455a6e2",
+    "schemas/v11/kristal-dictionary-catalog.schema.json": "58132545e23367bf4b0f207d59fd9fa23235a8d0f8913d574cc036e7205426d9",
+    "schemas/v11/kristal-dik-coverage-report.schema.json": "9eef3af61beaa8d74f821429fe685fe9532a1ac3e58cc4d59bfb71e50161f586",
+    "schemas/v11/kristal-external-crosswalk.schema.json": "b89aad88281f500b9609045b99c5523873407cd8c3407aa0d2b629739fbbf172",
+    "schemas/v11/kristal-external-lexical-record.schema.json": "92dd5465dd1a71b119d942b710ab57029c40ca07e81357b61627f4a537a5c1c4",
+    "schemas/v11/kristal-identity-registry.schema.json": "d18d82432e35d64af82f175342c96d162c15a21966ba45ecdda8bb698997972a",
+    "schemas/v11/kristal-semantic-graph.schema.json": "405fdae79a2ab1c4c7147baf7aeac6b6964d59282046f8a5e2e9d2185e42de86",
+    "schemas/v11/kristal-wikidata-lexical-record.schema.json": "4f2cd9008bf30f650797589ac8b682c0a859c533a82fd5956c19c8b6c4b47eeb",
+    "tools/v11/dictionaries.py": "8df5fec4d58aeee955f354fd0a17b7779589b6183927bbe345dd17282c076eee",
+    "tools/v11/dik_coverage.py": "79b8b1bfbf35cf079fdc846ffac671a06fe4c9ac206201992b83b3b4e708762c",
+    "tools/v11/interop_preflight.py": "75b3a932b7e875180ddbbd85476d7e968b1f1772f3721cfecd23fa0f8af9abd7",
+    "tools/v11/validate_v11.py": "5b4fb2d70a2275d0262195999d85bba36393fce82ea81d69e02e6d1b7f2ea8a7"
+  },
+  "profile": "kristal-integration-framework-pin/v11.0-draft.4",
+  "version": "11.0.0-draft.4"
+}

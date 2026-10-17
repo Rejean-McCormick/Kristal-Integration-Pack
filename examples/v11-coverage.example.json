@@ -1,0 +1,80 @@
+{
+  "all_locales": {
+    "direct": {
+      "KP": 0,
+      "KQ": 0
+    },
+    "usable": {
+      "KP": 0,
+      "KQ": 1
+    }
+  },
+  "artifact_type": "kristal_dik_coverage_report",
+  "catalog_id": "wikidata-import-demo-snapshot",
+  "catalog_sha256": "63662038addf7ca5e2e24729a024ea3b3b51ebb83533f9d1d2c263bf0487deb1",
+  "graph_id": "demo-graph",
+  "graph_sha256": "50caca8e1af9af62d5af7f757c87b05d2302e00ab18010ea2bc6606f0a7fec27",
+  "locales": [
+    {
+      "KP": {
+        "conflicted": 0,
+        "direct": 0,
+        "fallback": 0,
+        "missing": 1,
+        "missing_ids_sample": [
+          "KP2001"
+        ],
+        "sample_truncated": false,
+        "total": 1
+      },
+      "KQ": {
+        "conflicted": 0,
+        "direct": 0,
+        "fallback": 1,
+        "missing": 1,
+        "missing_ids_sample": [
+          "KQ1002"
+        ],
+        "sample_truncated": false,
+        "total": 2
+      },
+      "complete_direct": false,
+      "complete_usable": false,
+      "tag": "fr-CA"
+    },
+    {
+      "KP": {
+        "conflicted": 0,
+        "direct": 0,
+        "fallback": 0,
+        "missing": 1,
+        "missing_ids_sample": [
+          "KP2001"
+        ],
+        "sample_truncated": false,
+        "total": 1
+      },
+      "KQ": {
+        "conflicted": 0,
+        "direct": 1,
+        "fallback": 0,
+        "missing": 1,
+        "missing_ids_sample": [
+          "KQ1002"
+        ],
+        "sample_truncated": false,
+        "total": 2
+      },
+      "complete_direct": false,
+      "complete_usable": false,
+      "tag": "en"
+    }
+  ],
+  "namespace_id": "example.org/kristal-demo",
+  "report_id": "dik-coverage-86003ca2c27b6e3efd30",
+  "schema_version": "11.0",
+  "semantic_reference_count": {
+    "KP": 1,
+    "KQ": 2
+  }
+}
