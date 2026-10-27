@@ -13,13 +13,13 @@ It is **not** a semantic authority, a dictionary approval service, a publisher, 
 | Component | Supported or documented baseline | Integration scope |
 | --- | --- | --- |
 | Kristal Framework | **11.0.0-draft.4** | Exact checkout required; 13 contract/tool files pinned by SHA-256 |
-| Kristal Authoring Kit | **4.0.0-draft.3** | Separate, explicitly approved catalog import and selection |
+| Kristal Authoring Kit | **4.0.0-draft.4** (lot 1 candidate) | Separate, explicitly approved catalog import and selection |
 | diK | **1.0.0-alpha.7** | Read-only validation of incoming catalogs and optional import receipts |
 | Arketype | **1.6.0** | Ecosystem compatibility reference; no runtime integration claimed |
 | Kompiler | Historical **0.8.0-alpha.1** compatibility profile | Context Pack and eligible v7 Surface → v6 projection |
 | Konstellation | Historical **1.0.0-rc.2** overlay target | Opt-in legacy installation only on a verified, unmodified checkout |
 
-The Authoring Kit draft.3 still has its own Framework draft.3 pin. The Pack does not silently change that pin. Framework v11 schemas consumed here remain byte-compatible between draft.3 and draft.4; the additional interop preflight is pinned to draft.4.
+The Authoring Kit draft.4 lot-1 candidate now uses this exact 13-file Framework draft.4 pin. Earlier Kit draft.3 packages remain pinned to draft.3 and are not silently upgraded. The Pack never registers, selects, activates, or publishes authoring changes.
 
 ## What the Pack provides
 
@@ -82,7 +82,7 @@ python tools/v11_integration.py view \
 
 For these commands, `--out` creates a **new file only**: an existing destination will not be overwritten. The resulting `read-view/v11.0-draft.1` is a **derived display artifact**, not a new semantic graph, identity assignment, or publication record.
 
-## diK alpha.7 → Authoring Kit draft.3: guarded handoff
+## diK alpha.7 → Authoring Kit draft.4 (lot 1): guarded handoff
 
 Use the Pack to perform an independent, read-only preflight before an approved catalog is considered for import into the Authoring Kit.
 
@@ -232,3 +232,7 @@ See [`docs/QUALIFICATION_030_ALPHA1.md`](docs/QUALIFICATION_030_ALPHA1.md), [`do
 This alpha release has **not** been validated on a complete production Konstellation deployment, through Astro/Svelte browser flows, under live multiuser Reader Policies, or against a real large-scale Wikidata import from the diK executable. Full end-to-end restore/recovery, signatures and approvals, C1/C2 host authorization, and final cross-repository conformance remain open.
 
 **Release principle:** validate and explain interoperability; never silently merge identities, overwrite canonical data, install an existing overlay, or imply approval from a successful preflight.
+
+### Lot 1 alignment verification (2026-10-27)
+
+See [`docs/LOT1_KIT_ALIGNMENT.md`](docs/LOT1_KIT_ALIGNMENT.md). This repository remains Integration Pack `0.3.0-alpha.1`; its normative pins and runtime semantics were not modified.

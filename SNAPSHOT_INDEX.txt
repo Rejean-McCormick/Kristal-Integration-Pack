@@ -1,24 +1,33 @@
 ZmartZnap snapshot file index
-Files included: 32
+Files included: 47
 
 .github/workflows/ci.yml
+AGENTS.md
 CHANGELOG.md
 config/alfresco-adapter.README.md
 config/powershell-example.ps1
+contracts/v11-framework-pin.json
 docs/ALIGNMENT_V10.md
+docs/ALIGNMENT_V11.md
 docs/C5_KOMPILER_08.md
+docs/DIK_KIT_HANDOFF_V11.md
 docs/INVENTAIRE.md
 docs/PLAN_EXECUTION.md
 docs/QUALIFICATION.md
+docs/QUALIFICATION_030_ALPHA1.md
+docs/QUALIFICATION_V11.md
 docs/RELEASE_VERIFICATION.md
 docs/SECURITE.md
 examples/demo-backend.json
 examples/kompiler-v7-projection-demo.json
 examples/kristall-surface.query.json
+examples/v11-coverage.example.json
+examples/v11-read-view.example.json
 examples/zoology-github-collection.query.json
 GitSink.bat
 MANIFEST.sha256.json
 overlay/server/integrations/kompiler-bridge.mjs
+overlay/server/integrations/kristal-v11-read-view.mjs
 overlay/src/components/KompilerPanel.svelte
 README.md
 tests/bridge.test.mjs
@@ -27,9 +36,15 @@ tests/live_c5_zoology.py
 tests/overlay.test.mjs
 tests/test_c3_readiness.py
 tests/test_installer.py
+tests/test_v11_handoff.py
+tests/test_v11_integration.py
+tests/v11.test.mjs
 tools/check_c3_readiness.py
 tools/install.py
 tools/kristal-bridge.mjs
+tools/release_package.py
+tools/v11_handoff.py
+tools/v11_integration.py
 tools/verify_manifest.py
 VERSION
 ZmartZnap.pyw
