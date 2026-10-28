@@ -2,6 +2,8 @@
 
 **Date : 17 octobre 2026.** Ce document qualifie une intégration candidate **de lecture**, pas une release de production ou une migration de canon.
 
+> **Note ajoutée le 27 octobre 2026 (historique des tests préservé) :** le candidat Authoring Kit **`4.0.0-draft.4`** est décrit comme aligné sur le verrou Framework draft.4 dans [`LOT1_KIT_ALIGNMENT.md`](LOT1_KIT_ALIGNMENT.md). Le présent rapport de tests concerne toujours **l'Authoring Kit `4.0.0-draft.3`** ; il ne prouve pas qu'une qualification draft.4 a été exécutée.
+
 ## Versions concernées
 
 | Composant | Profil |
@@ -28,7 +30,7 @@
 - Aucune installation Konstellation, compilation Astro/Svelte, navigateur, routage HTTP public, Reader Policy C1/C2 ou déploiement Kubernetes/GitHub vérifié.
 - Aucune nouvelle qualification de l'API Kompiler 0.8 ou de projections historiques sur un serveur distant.
 - Aucun dump Wikidata massif, aucune gouvernance multi-utilisateur signée, aucune restauration après panne système et aucun TCK diK complet exécuté.
-- L'Authoring Kit draft.3 conserve son pin d'origine draft.3 ; sa mise à jour propre à draft.4 reste un travail du dépôt Kit. Les schémas v11 utilisés ne changent pas de contenu entre ces deux drafts.
+- **Au 17 octobre (date de cette qualification)**, l'Authoring Kit draft.3 conservait son pin Framework draft.3 ; son alignement sur draft.4 relevait du dépôt Kit. Le document de lot 1 du 27 octobre présente désormais un candidat Kit draft.4 aligné, mais **ce résultat historique n'a pas été rejoué** sur ce candidat. Les schémas v11 utilisés ne changent pas de contenu entre ces deux drafts.
 
 ## Conclusions et décisions
 

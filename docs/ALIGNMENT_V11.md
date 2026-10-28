@@ -6,7 +6,7 @@
 
 1. **Identités canoniques** : un graphe source contient uniquement des KQ/KP/KA/KS dans les champs d'identité, avec `(namespace_id, id)` comme clé logique. Les Q/P Wikidata sont uniquement des correspondances externes `accepted + exactMatch` contrôlées par le Framework.
 2. **Lexique hors graphe** : toutes les étiquettes sont dans `presentation[].lexical` du fichier *dérivé*, jamais substituées aux identifiants du graphe. Citations et littéraux d'assertions restent des valeurs de données.
-3. **Souveraineté des dictionnaires** : le Framework v11 draft.3 audite catalogue, SHA-256 de toutes les couches, sources Wikidata autorisées, provenances, priorité et replis linguistiques explicites. Le Pack délègue cette responsabilité et n'invente pas un nouveau résolveur d'identité.
+3. **Souveraineté des dictionnaires** : le Framework v11 draft.4 épinglé (avec des schémas inchangés depuis draft.3) audite catalogue, SHA-256 de toutes les couches, sources Wikidata autorisées, provenances, priorité et replis linguistiques explicites. Le Pack délègue cette responsabilité et n'invente pas un nouveau résolveur d'identité.
 4. **Complétude** : la commande `coverage` appelle directement le rapport de référence `kristal_dik_coverage_report` du Framework, sans fusionner repli et traduction directe.
 5. **Provenance et pinning** : `contracts/v11-framework-pin.json` lie cette candidate à la version `11.0.0-draft.4` et aux empreintes exactes des schémas et outils consommés, dont `interop_preflight.py`. Les schémas v11 conservent leurs octets depuis draft.3. Tout changement doit être revu et repinné explicitement.
 6. **Lecture seule** : `check`, `coverage` et `view` ne modifient jamais un graphe, registre, crosswalk, catalogue ou couche lexicale. `--out` crée un *nouveau* fichier par création exclusive (échec s'il existe).
@@ -66,10 +66,12 @@ python tools/verify_manifest.py
 **Non qualifié / hors périmètre** : installation sur un Konstellation existant, build Astro/Svelte, parcours navigateur, politique de lecture multiutilisateur, authentification C1/C2, publication distante, migration diK/Authoring Kit, performance de 300 langues en production. L'overlay v10 ne doit pas être réinstallé sur une application Konstellation déjà intégrée.
 
 
-## Handoff diK alpha.7 → Authoring Kit draft.3
+## Handoff diK alpha.7 → Authoring Kit draft.4 (candidat lot 1)
+
+**État au 27 octobre 2026 :** le Pack reste en `0.3.0-alpha.1`, et `docs/LOT1_KIT_ALIGNMENT.md` rapporte l'alignement de l'Authoring Kit **`4.0.0-draft.4`** sur le verrou exact Framework `11.0.0-draft.4`. Ce changement de référence documentaire ne constitue pas un nouveau test : la qualification croisée du **17 octobre** portait sur le **Kit `4.0.0-draft.3`**. Le code Kit draft.4 n'est pas inclus dans le snapshot du Pack. La compatibilité opérationnelle doit être vérifiée sur un checkout Kit approuvé.
 
 Le précontrôle additionnel `tools/v11_handoff.py` lit les vrais contrats épinglés du Framework draft.4 et refuse les couches non Wikidata si `--kit-import-candidate` est sélectionné. Son contrôle facultatif de `dik-job.json` confirme l'association entre le catalogue, le registre et le crosswalk approuvés. **Le reçu ne prouve pas une approbation humaine ou l'origine Wikidata.**
 
 Les commandes `import-dik-catalog`, `select-v11-catalog` et `recover-v11` demeurent des opérations de l'**Authoring Kit**. Ce Pack ne les exécute jamais automatiquement et ne modifie pas le graphe canonique. Le profil dérivé `kristal.integration.read-view/v11.0-draft.1` reste inchangé ; le lecteur Node admet les anciennes vues draft.3 ainsi que les vues draft.4.
 
-Voir [DIK_KIT_HANDOFF_V11](DIK_KIT_HANDOFF_V11.md) et [Qualification alpha.3](QUALIFICATION_030_ALPHA1.md) pour la preuve réellement exécutée et les limitations.
+Voir [DIK_KIT_HANDOFF_V11](DIK_KIT_HANDOFF_V11.md), [Lot 1 Kit alignment](LOT1_KIT_ALIGNMENT.md) et [Qualification 0.3.0-alpha.1](QUALIFICATION_030_ALPHA1.md) pour distinguer l’alignement courant des preuves historiques et de leurs limites.

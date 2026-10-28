@@ -16,4 +16,4 @@
 
 ## Alignement v11 (Integration Pack 0.3.0-alpha.1)
 
-Le pack ne devient ni registre d'instances (Manager), ni autorité canonique (Framework/Kit), ni gouverneur de dictionnaires (diK). Il peut **refuser** un échange diK → Kit qui viole les SHA-256, espaces de noms ou correspondances, et fabriquer une lecture dérivée non canonique. Le Framework draft.4 reste l'autorité de validation; l’Authoring Kit draft.3 reste l’autorité pour importer, enregistrer et sélectionner un catalogue.
+Le pack ne devient ni registre d'instances (Manager), ni autorité canonique (Framework/Kit), ni gouverneur de dictionnaires (diK). Il peut **refuser** un échange diK → Kit qui viole les SHA-256, espaces de noms ou correspondances, et fabriquer une lecture dérivée non canonique. Le Framework draft.4 reste l’autorité de validation ; l’Authoring Kit reste l’autorité pour importer, enregistrer et sélectionner un catalogue. Le Kit draft.3 a été qualifié historiquement le 17 octobre ; le candidat lot 1 draft.4 est documenté comme aligné sur le pin Framework draft.4 au 27 octobre, sans nouvelle qualification croisée fournie ici. Voir [LOT1_KIT_ALIGNMENT](LOT1_KIT_ALIGNMENT.md).

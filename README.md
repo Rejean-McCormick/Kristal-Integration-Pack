@@ -19,7 +19,7 @@ It is **not** a semantic authority, a dictionary approval service, a publisher, 
 | Kompiler | Historical **0.8.0-alpha.1** compatibility profile | Context Pack and eligible v7 Surface → v6 projection |
 | Konstellation | Historical **1.0.0-rc.2** overlay target | Opt-in legacy installation only on a verified, unmodified checkout |
 
-The Authoring Kit draft.4 lot-1 candidate now uses this exact 13-file Framework draft.4 pin. Earlier Kit draft.3 packages remain pinned to draft.3 and are not silently upgraded. The Pack never registers, selects, activates, or publishes authoring changes.
+The October 27 lot-1 alignment record **reports** that Authoring Kit draft.4 uses a byte-for-byte matching 13-file Framework draft.4 pin. This Pack snapshot does not include the draft.4 Kit source for independent comparison or a fresh cross-repository test. The October 17 temporary-workspace qualification used Kit draft.3, which retained its separate Framework draft.3 pin. The Pack never registers, selects, activates, or publishes authoring changes. See [`docs/LOT1_KIT_ALIGNMENT.md`](docs/LOT1_KIT_ALIGNMENT.md) for the evidence boundary.
 
 ## What the Pack provides
 
@@ -206,7 +206,7 @@ node --test tests/v11.test.mjs
 
 The **0.3.0-alpha.1 local qualification** recorded **29 passing Python tests and 15 passing Node tests**, including a temporary Authoring Kit draft.3 example-workspace handoff. This does **not** establish a production release. The diK alpha.7 receipt tests used a synthetic receipt structure; the exact binary output of a real diK import was not independently qualified here.
 
-See [`docs/QUALIFICATION_030_ALPHA1.md`](docs/QUALIFICATION_030_ALPHA1.md), [`docs/QUALIFICATION_V11.md`](docs/QUALIFICATION_V11.md), and [`docs/RELEASE_VERIFICATION.md`](docs/RELEASE_VERIFICATION.md) for executed evidence and remaining gaps.
+These are **historical** results from October 17, not fresh tests against Kit draft.4. See [`docs/QUALIFICATION_030_ALPHA1.md`](docs/QUALIFICATION_030_ALPHA1.md), [`docs/QUALIFICATION_V11.md`](docs/QUALIFICATION_V11.md), and [`docs/RELEASE_VERIFICATION.md`](docs/RELEASE_VERIFICATION.md) for executed evidence and remaining gaps.
 
 ## Security and ownership rules
 
@@ -235,4 +235,4 @@ This alpha release has **not** been validated on a complete production Konstella
 
 ### Lot 1 alignment verification (2026-10-27)
 
-See [`docs/LOT1_KIT_ALIGNMENT.md`](docs/LOT1_KIT_ALIGNMENT.md). This repository remains Integration Pack `0.3.0-alpha.1`; its normative pins and runtime semantics were not modified.
+See [`docs/LOT1_KIT_ALIGNMENT.md`](docs/LOT1_KIT_ALIGNMENT.md). This repository remains Integration Pack `0.3.0-alpha.1`; its normative pins and runtime semantics were not modified. The reported Kit draft.4 alignment has not been independently verified in this code snapshot.

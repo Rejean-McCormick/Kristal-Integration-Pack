@@ -1,4 +1,6 @@
-# diK alpha.7 → Integration Pack 0.3 → Authoring Kit draft.3
+# diK alpha.7 → Integration Pack 0.3 → Authoring Kit draft.4 (lot 1 candidate)
+
+> **Mise à jour documentaire du 27 octobre 2026.** L'Authoring Kit **`4.0.0-draft.4`** est désormais le candidat lot 1 selon [`LOT1_KIT_ALIGNMENT.md`](LOT1_KIT_ALIGNMENT.md), avec le même verrou Framework `11.0.0-draft.4` annoncé. Les essais croisés enregistrés le **17 octobre 2026** concernaient **l'Authoring Kit `4.0.0-draft.3`**, pas draft.4. Le snapshot du Pack ne contient ni le code du Kit draft.4 ni de nouvelle preuve de qualification croisée. Les étapes d'adoption ci-dessous restent des exemples **à vérifier sur le Kit autorisé**.
 
 ## Périmètre et autorités
 
@@ -8,7 +10,7 @@
 
 **Integration Pack 0.3.0-alpha.1** : **consommateur non canonique en lecture seule**. Son précontrôle appelle `tools/v11/interop_preflight.py` épinglé, puis vérifie facultativement le reçu alpha.7. Le Pack ne réécrit aucun dictionnaire, ne transforme aucun mot en identité, ne publie ni n'active de catalogues.
 
-**Authoring Kit 4.0.0-draft.3** : valide à nouveau le catalogue du projet, enregistre une nouvelle révision en tant qu'artefact logique et n'en change la sélection active que par commande explicite. Les corrections curatées historiques restent séparées des nouveaux lexiques Wikidata.
+**Authoring Kit `4.0.0-draft.4` (candidat lot 1 documenté)** : le Kit reste responsable de la validation du catalogue, de l'enregistrement des révisions et de leur sélection explicite. **`4.0.0-draft.3`** a servi à l'essai croisé historique d'octobre 17; cet essai ne valide pas automatiquement le candidat draft.4. Les corrections curatées historiques restent séparées des nouveaux lexiques Wikidata.
 
 ## 1. Précontrôle de lecture sur un catalogue v11 déjà existant
 
@@ -58,7 +60,7 @@ Les chemins, droits et artefacts doivent être contrôlés par l'opérateur. Les
 ## Sécurité et version
 
 - Le Pack verrouille **exactement Framework `11.0.0-draft.4`** et 13 fichiers du contrat/outillage v11 par SHA-256. Il rejette un Framework inattendu au lieu d'exécuter du code d'une autre version.
-- Les schémas v11 et les outils de lecture utilisés gardent les octets observés en draft.3 ; le précontrôle draft.4 est un ajout. Le Kit draft.3 conserve son pin Framework draft.3, ce qui demande une nouvelle qualification lorsqu'il évoluera.
+- Les schémas v11 et les outils de lecture utilisés gardent les octets observés en draft.3 ; le précontrôle draft.4 est un ajout. **Historiquement**, le Kit draft.3 avait son propre pin Framework draft.3. Le candidat Kit draft.4 est déclaré aligné sur le pin draft.4 dans le lot 1 ; une comparaison indépendante des fichiers et une qualification croisée restent nécessaires sur le code Kit réel.
 - Le lecteur Node accepte les vues `read-view/v11.0-draft.1` générées depuis Framework draft.3 ou draft.4, **sans** confondre cette vérification structurelle avec une validation canonique.
 - Pas de réseau, de téléchargement de dump, d'agent partagé, de fusion de KQ, d'équivalence par libellé ni de modification Konstellation.
 - Le Pack **ne réinstalle pas** les overlays historiques sur une instance Konstellation déjà intégrée. Son installateur reste strict.
