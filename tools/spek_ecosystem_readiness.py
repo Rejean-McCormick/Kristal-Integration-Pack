@@ -43,6 +43,24 @@ def _safe_reason(raw: str) -> str:
     return 'contract_or_environment_rejected'
 
 
+def _valid_framework_handoff_schema(path: Path) -> bool:
+    """Reject a lookalike JSON file that silently relaxes private handoff gates."""
+    if path.is_symlink() or not path.is_file() or path.stat().st_size > 2_000_000:
+        return False
+    try:
+        doc=json.loads(path.read_text(encoding='utf-8'))
+        props=doc['properties']
+        q=props['qualification']['properties']
+        return (doc.get('type')=='object' and doc.get('additionalProperties') is False
+                and props['format'].get('const')=='spek.private-editorial-handoff/1.0'
+                and props['status'].get('const')=='PRIVATE_UNQUALIFIED_NOT_PUBLISHABLE'
+                and all(q[field].get('const') is False for field in (
+                    'semantic_entailment_checked','semantik_result_pairs_verified',
+                    'rhetorical_relations_approved','c1_c2_c3_approved','publication_authorized')))
+    except (OSError,ValueError,TypeError,KeyError,AttributeError):
+        return False
+
+
 def audit(*,spek:Path, manager:Path, semantik:Path, runtime:Path, arketype:Path,
           framework:Path, public:Path, instance:Path, requests:Path,
           graph:Path, identity_map:Path, runtime_root:Path,
@@ -87,8 +105,9 @@ def audit(*,spek:Path, manager:Path, semantik:Path, runtime:Path, arketype:Path,
                         repos['arketype'])
         if 'framework_presence' not in steps:
             p=repos['framework']/'profiles/spek/private-editorial-handoff.schema.json'
-            steps['framework_schema']={'status':'PASS' if p.is_file() and not p.is_symlink() else 'BLOCKED',
-                                       'diagnostic':'schema_present' if p.is_file() else 'schema_missing'}
+            verified=_valid_framework_handoff_schema(p)
+            steps['framework_schema']={'status':'PASS' if verified else 'BLOCKED',
+                                       'diagnostic':'schema_private_gates_checked' if verified else 'schema_invalid_or_missing'}
         if 'public_presence' not in steps:
             p=repos['public']/'tools/wiki_deploy.py'
             steps['public_gate_present']={'status':'PASS' if p.is_file() and not p.is_symlink() else 'BLOCKED',

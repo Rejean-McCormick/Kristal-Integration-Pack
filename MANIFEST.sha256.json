@@ -22,6 +22,7 @@
   "docs/QUALIFICATION_V11.md": "51a073d48d648a43f9ba9a93358b5ee45265e08c60ad861c4d0ad71ab9ffbe2e",
   "docs/RELEASE_VERIFICATION.md": "7e93e3b15b622ecff7b00cda08b01e748e7e036afdb72b209454f13863d2b80f",
   "docs/SECURITE.md": "7609295e6cc504268919bd348ac6d191b887a24307c1feb6f86e6bc21255293f",
+  "docs/SPEK_HUIT_DEPOTS_ACCEPTATION_2026-11-03.md": "a19afb6851e78b2dd41f4f9af080220a471332e0e1af39365e5319e8a847fd9b",
   "examples/demo-backend.json": "fa6c4506f1a06e5fd5f0bf7d8ba5adde1136faf5be58be93d077ee1acb15d2ef",
   "examples/kompiler-v7-projection-demo.json": "00786c09693538b53306eb149b08d86a2a0c98f900ed5c69797a8fe534fb94a6",
   "examples/kristall-surface.query.json": "5ddc4f3fc1761f30131f48e6b014d0e037029a3f637c0bbe5dff6505f656e1b9",
@@ -37,6 +38,7 @@
   "tests/overlay.test.mjs": "cffb119070d18f5648bf67871fa55a7c14ba178551baad4d5121ad13c2992bc6",
   "tests/test_c3_readiness.py": "0a531035c288931743769b2c0350cc788bd6a01aebb2ea62d789ae2705786481",
   "tests/test_installer.py": "ae4a3873031ded4b95c1d482ac2fef3459f3511904de77b3a098b09b0580632f",
+  "tests/test_spek_ecosystem_readiness.py": "8078b15e1c5999659af8baae964875858e406e4c15ad337101e923403de9253e",
   "tests/test_v11_handoff.py": "704c55a92d7ce0378bc408f634c774fdc8d3a5ca1152216960149acfb5f01d47",
   "tests/test_v11_integration.py": "e8a9280b6849fdff27aabe6093fb4230db55007e45db7fd3cb37972d60a30cdf",
   "tests/v11.test.mjs": "9a85dc32e454ca835f80ff30eeeb8c84c33113c83cc6811e4ae8d371e55f0f0b",
@@ -44,7 +46,8 @@
   "tools/install.py": "ed7104fda11b8538e9a78b7de34d7b2d5a29ad62ce186029c4e2abc9b66978bc",
   "tools/kristal-bridge.mjs": "1c0ff630394bd2525536eff70631994735e0c4c4879347fbf618919e36d0dba6",
   "tools/release_package.py": "544861bc1204a55bada9fcb2e19f9b1b65656d19919341011c060224402940fd",
+  "tools/spek_ecosystem_readiness.py": "873eeccc948d1ffdd3aac109e04bd1c622ad27e1338f2556907dd20835080cbc",
   "tools/v11_handoff.py": "c53b5d931dd2dd5a2f1c4453022d9033edccd1d04d2313c385847d76f68eec72",
   "tools/v11_integration.py": "6c94ffd8f8f9619d17afcd0548037d95fda40e93b6ade6bc43e36d1edd27bba1",
-  "tools/verify_manifest.py": "def08ab70ea16511450a792ffbcb82e1c90bda0833be3d7276f9a260a0fbf1da"
+  "tools/verify_manifest.py": "1ecccee38ed8308f5b8ae4b33d732f73767e940ac1ca3d7ab9f2ed4cb196a228"
 }
