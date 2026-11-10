@@ -236,3 +236,7 @@ This alpha release has **not** been validated on a complete production Konstella
 ### Lot 1 alignment verification (2026-10-27)
 
 See [`docs/LOT1_KIT_ALIGNMENT.md`](docs/LOT1_KIT_ALIGNMENT.md). This repository remains Integration Pack `0.3.0-alpha.1`; its normative pins and runtime semantics were not modified. The reported Kit draft.4 alignment has not been independently verified in this code snapshot.
+
+## Branch 04 functional-chain alignment
+
+See [final-system reader/language boundaries](docs/BRANCH04_FINAL_READ_CHAIN.md). This is a pinned-snapshot coordination note and does not override owner normative contracts or qualify public publication.

@@ -1,0 +1,72 @@
+SMART DUMPER INDEX
+==================
+generated_at: 2026-11-09T16:32:01.563616
+source_root: C:\mycode\Kristal\Kristal-Integration-Pack
+mode: snapshot
+zip_file: Kristal-Integration-Pack_Code_snapshot.zip
+embedded_index: SMARTDUMP_INDEX.txt
+file_count: 59
+total_bytes: 234902
+compression: ZIP_DEFLATED level 1
+
+FILES
+-----
+.github/workflows/ci.yml	1197 bytes
+AGENTS.md	1554 bytes
+CHANGELOG.md	2026 bytes
+config/alfresco-adapter.README.md	702 bytes
+config/powershell-example.ps1	702 bytes
+contracts/v11-framework-pin.json	1621 bytes
+docs/ALIGNMENT_V10.md	5687 bytes
+docs/ALIGNMENT_V11.md	7506 bytes
+docs/C5_KOMPILER_08.md	2653 bytes
+docs/DIK_KIT_HANDOFF_V11.md	5642 bytes
+docs/INVENTAIRE.md	2343 bytes
+docs/LOT1_KIT_ALIGNMENT.md	2697 bytes
+docs/PLAN_EXECUTION.md	2591 bytes
+docs/QUALIFICATION.md	2579 bytes
+docs/QUALIFICATION_030_ALPHA1.md	4474 bytes
+docs/QUALIFICATION_V11.md	2363 bytes
+docs/RELEASE_VERIFICATION.md	3532 bytes
+docs/SECURITE.md	2220 bytes
+docs/SPEK_HUIT_DEPOTS_ACCEPTATION_2026-11-03.md	1555 bytes
+examples/demo-backend.json	221 bytes
+examples/kompiler-v7-projection-demo.json	935 bytes
+examples/kristall-surface.query.json	660 bytes
+examples/v11-coverage.example.json	1751 bytes
+examples/v11-read-view.example.json	1670 bytes
+examples/zoology-github-collection.query.json	292 bytes
+GitSink.bat	1863 bytes
+integrations/unesco-mt1-10/handoff.json	1423 bytes
+integrations/unesco-mt1-10/lot2-status.json	758 bytes
+integrations/unesco-mt1-10/lot3-status.json	1051 bytes
+integrations/unesco-mt1-10/README.md	1789 bytes
+MANIFEST.sha256.json	5100 bytes
+overlay/server/integrations/kompiler-bridge.mjs	5452 bytes
+overlay/server/integrations/kristal-v11-read-view.mjs	4380 bytes
+overlay/src/components/KompilerPanel.svelte	4684 bytes
+README.md	14223 bytes
+SNAPSHOT_INDEX.txt	1310 bytes
+tests/bridge.test.mjs	7093 bytes
+tests/check_schemas.py	1200 bytes
+tests/live_c5_zoology.py	3944 bytes
+tests/overlay.test.mjs	3858 bytes
+tests/test_c3_readiness.py	1511 bytes
+tests/test_installer.py	4120 bytes
+tests/test_spek_ecosystem_readiness.py	1648 bytes
+tests/test_unesco_mt1_10_handoff.py	1553 bytes
+tests/test_unesco_view_bridge.py	2328 bytes
+tests/test_v11_handoff.py	10586 bytes
+tests/test_v11_integration.py	7575 bytes
+tests/v11.test.mjs	4432 bytes
+tools/check_c3_readiness.py	2088 bytes
+tools/install.py	10690 bytes
+tools/kristal-bridge.mjs	11810 bytes
+tools/release_package.py	2398 bytes
+tools/spek_ecosystem_readiness.py	8386 bytes
+tools/unesco_mt1_10_view_bridge.py	6582 bytes
+tools/v11_handoff.py	7409 bytes
+tools/v11_integration.py	10977 bytes
+tools/verify_manifest.py	605 bytes
+VERSION	14 bytes
+ZmartZnap.pyw	22889 bytes
